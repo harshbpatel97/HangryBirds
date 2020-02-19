@@ -1,0 +1,55 @@
+{% load static %}
+<!doctype HTML>
+<html lang="en">
+<head>
+    <title>Hangry Birds</title>
+    <meta name="description" content="Hangry Birds" />
+    <meta charset="UTF-8">
+    <base href="/">
+    <link href="{% static "css/home.css" %}" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<header>
+    <h1>Welcome to HangryBirds!</h1>
+    <nav>
+        <div class="navbar">
+            <a href="#home">Home</a>
+            <a href="#news">News</a>
+            <div class="dropdown">
+                <button class="dropbtn">Search</button>
+                <div class="dropdown-content">
+                    <a href="#">By Restaurant</a>
+                    <a href="#">By Item</a>
+                    <a href="#">Editor's Picks</a>
+                </div>
+            </div>
+            <a href="#login">Login/Register</a>
+        </div>
+    </nav>
+
+
+</header>
+<main>
+
+    <section class="presentation">
+        <div class="introduction">
+            <div class="intro-text">
+                <h1>Change How You Review Restaurants</h1>
+                <p>
+                    Thank you for visiting our site. On HangryBirds, you will be able to rate your favorite meal from your favorite restaurants!
+                    Don't worry, you can also search for other restaurants based on the restaurant itself or the item that you would like to eat.
+                    Want to find the best falafel in town? Look no further! HangryBirds will show you the best recommendations based on the reviews of other users!
+                </p>
+            </div>
+            <div class="cta">
+                <button class="cta-create">Create Account</button>
+                <button class="cta-login">Login</button>
+            </div>
+        </div>
+        <div class="cover">
+            <img id="HangryPic" src="{% static "images/Hangry.jpg" %}" alt="HangryPic">
+        </div>
+    </section>
+</main>
+
+</body>
