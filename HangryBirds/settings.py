@@ -94,7 +94,7 @@ DATABASES = {
         'NAME': 'Restaurants',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '34.73.45.104',
+        'HOST': '127.0.0.1',
         'PORT': '5432',
     }
 }
