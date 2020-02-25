@@ -1,0 +1,93 @@
+{% load static %}
+<!doctype HTML>
+<html lang="en">
+<head>
+    <title>Hangry Birds</title>
+    <meta name="description" content="Hangry Birds" />
+    <meta charset="UTF-8">
+
+    <link href= "{% static "css/home.css" %}" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<header>
+    <h1>You have successfully logged in</h1>
+    <nav>
+        <div class="navbar">
+            <a href="index.html">Home</a>
+            <a href="#news">News</a>
+            <div class="dropdown">
+                <button class="dropbtn">Search</button>
+                <div class="dropdown-content">
+                    <a href="#">By Restaurant</a>
+                    <a href="#">By Item</a>
+                    <a href="#">Editor's Picks</a>
+                </div>
+            </div>
+            <a href={% url 'home' %}>Logout</a>
+        </div>
+    </nav>
+
+
+</header>
+<main>
+    <section class="main-information">
+        <div class="left-side">
+            <h2>Top Restaurants Around Charlotte!</h2>
+            <div class="top-restaurants">
+
+                <a href="#halal">
+                <div class="restaurant" id="top-1">
+                        <img src="{% static "images/Halal.jpg" %}" alt="Halal">
+                        <div class="restaurant-text">
+                            <h3>Halal</h3>
+
+                        </div>
+                    </div>
+                </a>
+                <a href="#cfa">
+                    <div class="restaurant" id="top-2">
+                        <img src="{% static "images/cfa.png" %}" alt="Chick-Fil-A">
+                        <div class="restaurant-text">
+                            <h3>Chick-Fil-A</h3>
+
+                        </div>
+                    </div>
+                </a>
+                <a href="#tijuana">
+                    <div class="restaurant" id="top-3">
+                        <img src="{% static "images/tf.jpg" %}" alt="Tijuana Flats">
+                        <div class="restaurant-text">
+                            <h3>Tijuana Flats</h3>
+
+                        </div>
+                    </div>
+                </a>
+                <a href="#wendys">
+                    <div class="restaurant" id="top-4">
+                        <img src="{% static "images/wendys.png" %}" alt="Wendy's">
+                        <div class="restaurant-text">
+                            <h3>Wendy's</h3>
+                        </div>
+                    </div>
+                </a>
+                <a href="#burger-king">
+                    <div class="restaurant" id="top-5">
+                        <img src="{% static "images/BK.jpg" %}" alt="Burger King">
+                        <div class="restaurant-text">
+                            <h3>Burger King</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="right-side">
+            <h2></h2>
+            <div class="favorite-restaurants"></div>
+        </div>
+    </section>
+
+
+</main>
+
+
+</body>

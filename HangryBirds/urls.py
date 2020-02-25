@@ -20,9 +20,13 @@ from django.conf.urls import include, url
 from django.views.generic.base import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
+from home import views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^home/', include('home.urls')),
-    url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+                  url(r'^admin/', admin.site.urls),
+                  url(r'^home/', include('home.urls')),
+                  url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
+                  url(r'^signup/', views.signup, name="signup"),
+                  url(r'^login/', views.login, name="login"),
+              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
