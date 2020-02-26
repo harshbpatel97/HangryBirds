@@ -93,8 +93,10 @@ DATABASES = {
         'NAME': 'Restaurants',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        #'HOST': '127.0.0.1', for local instance
+        #'HOST': '/cloudsql/hangrybirds:us-east1:poll-instance1',
+        'HOST': '34.73.45.104',
+        #'PORT': '5432',
     }
 }
 # Password validation
