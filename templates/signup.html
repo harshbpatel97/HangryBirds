@@ -29,7 +29,7 @@
 </header>
 <main>
     {% block content %}
-        <form method="POST">
+        <form method="POST" action="/signup/">
             {% csrf_token %}
             <div class="container">
                 <h1>Sign Up</h1>
