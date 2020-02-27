@@ -17,10 +17,10 @@ def home(request):
 
 def signup(request):
     if request.method == 'POST':
-        #form = UserCreationForm(data=request.POST)
+        # form = UserCreationForm(data=request.POST)
 
         # if form.is_valid():
-        #print("Form is submitted")
+        # print("Form is submitted")
         username = request.POST["username"]
         email = request.POST["email"]
         password = request.POST["psw"]
@@ -50,25 +50,30 @@ def login(request):
 
 def login_view(request):
     if request.method == 'POST':
-        username = request.POST.get['uname']
-        password = request.POST.get['psw']
+        username = request.POST['uname']
+        password = request.POST['psw']
         user = authenticate(username=username, password=password)
         if user:
             if user.is_active:
                 # correct password, and the user is marked "active"
-                login(request, user)
                 # redirect to the success page
+                print("User exists")
                 template = loader.get_template("index.html")
                 return HttpResponse(template.render())
             else:
                 return HttpResponse("Your account was inactive")
+
         else:
             print("Someone tried to login and failed.")
             print("They used username: {} and password: {}".format(username, password))
             return HttpResponse("Invalid login details given")
     else:
         # show an error page
-        return HttpResponseRedirect()  # add error page link
+        form = UserCreationForm()
+        print("User doesn't exists")
+        return render(request=request,
+                      template_name="login.html",
+                      context={"form": form})  # add error page link
 
 
 def logout_view(request):

@@ -28,23 +28,25 @@
 
 </header>
 <main>
-    <div class="container">
-        <form method="POST" action="/login_view/">
+    {% block content %}
+        <form method="POST" action="/login_view/" >
             {% csrf_token %}
-            <label for="username"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
+             <div class="container">
+                <label for="username"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
 
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
 
-            <a href="index.html" class="loginbtn" type="submit">Login</a>
+                <button class="loginbtn" type="submit">Login</button>
 
-            <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+             </div>
         </form>
+    {% endblock %}
 
-    </div>
     <br>
     <div class="container">
         <a href="{% url 'home' %}" class="cancelLoginbtn">Cancel</a>

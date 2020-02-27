@@ -91,39 +91,33 @@ WSGI_APPLICATION = 'HangryBirds.wsgi.application'
 # Install PyMySQL as mysqlclient/MySQLdb to use Django's mysqlclient adapter
 # See https://docs.djangoproject.com/en/2.1/ref/databases/#mysql-db-api-drivers
 # for more information
-import pymysql
-pymysql.version_info = (1, 3, 13, "final", 0)
-pymysql.install_as_MySQLdb()
+try:
+    import MySQLdb  # noqa: F401
+except ImportError:
+    import pymysql
+    pymysql.install_as_MySQLdb()
 
-if os.getenv('GAE_APPLICATION', None):
-    # Running on production App Engine, so connect to Google Cloud SQL using
-    # the unix socket at /cloudsql/<your-cloudsql-connection string>
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'HOST': '/cloudsql/hangrybirds:us-east1:poll-instance',
-            'USER': 'root',
-            'PASSWORD': 'root',
-            'NAME': 'Restaurants',
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Restaurants',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        # For MySQL, set 'PORT': '3306' instead of the following. Any Cloud
+        # SQL Proxy instances running locally must also be set to tcp:3306.
+        'PORT': '5432',
     }
+}
+# In the flexible environment, you connect to CloudSQL using a unix socket.
+# Locally, you can use the CloudSQL proxy to proxy a localhost connection
+# to the instance
+DATABASES['default']['HOST'] = '/cloudsql/hangrybirds:us-east1:poll-instance'
+if os.getenv('GAE_INSTANCE'):
+    pass
 else:
-    # Running locally so connect to either a local MySQL instance or connect to
-    # Cloud SQL via the proxy. To start the proxy via command line:
-    #
-    #     $ cloud_sql_proxy -instances=[INSTANCE_CONNECTION_NAME]=tcp:3306
-    #
-    # See https://cloud.google.com/sql/docs/mysql-connect-proxy
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'HOST': '127.0.0.1',  # DB's IP address
-            'PORT': '5432',
-            'NAME': 'Restaurants',
-            'USER': 'root',
-            'PASSWORD': 'root',
-        }
-    }
+    DATABASES['default']['HOST'] = '127.0.0.1'
+# [END dbconfig]
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

@@ -29,4 +29,5 @@ urlpatterns = [
                   url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
                   url(r'^signup/', views.signup, name="signup"),
                   url(r'^login/', views.login, name="login"),
+                  url(r'^login_view/', views.login_view, name="login_view"),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
