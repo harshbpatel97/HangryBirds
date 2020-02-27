@@ -30,7 +30,7 @@ ALLOWED_HOSTS = [
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
-#add if any issues arise
+# add if any issues arise
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     'home/static/'
@@ -38,6 +38,7 @@ STATICFILES_DIRS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'home.apps.HomeConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -80,25 +81,50 @@ WSGI_APPLICATION = 'HangryBirds.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-#DATABASES = {
+# DATABASES = {
 #    'default': {
 #        'ENGINE': 'django.db.backends.sqlite3',
 #        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #   }
-#}
+# }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Restaurants',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        #'HOST': '127.0.0.1', for local instance
-        #'HOST': '/cloudsql/hangrybirds:us-east1:poll-instance1',
-        'HOST': '34.73.45.104',
-        #'PORT': '5432',
+# Install PyMySQL as mysqlclient/MySQLdb to use Django's mysqlclient adapter
+# See https://docs.djangoproject.com/en/2.1/ref/databases/#mysql-db-api-drivers
+# for more information
+import pymysql
+pymysql.version_info = (1, 3, 13, "final", 0)
+pymysql.install_as_MySQLdb()
+
+if os.getenv('GAE_APPLICATION', None):
+    # Running on production App Engine, so connect to Google Cloud SQL using
+    # the unix socket at /cloudsql/<your-cloudsql-connection string>
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '/cloudsql/hangrybirds:us-east1:poll-instance',
+            'USER': 'root',
+            'PASSWORD': 'root',
+            'NAME': 'Restaurants',
+        }
     }
-}
+else:
+    # Running locally so connect to either a local MySQL instance or connect to
+    # Cloud SQL via the proxy. To start the proxy via command line:
+    #
+    #     $ cloud_sql_proxy -instances=[INSTANCE_CONNECTION_NAME]=tcp:3306
+    #
+    # See https://cloud.google.com/sql/docs/mysql-connect-proxy
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '127.0.0.1',  # DB's IP address
+            'PORT': '5432',
+            'NAME': 'Restaurants',
+            'USER': 'root',
+            'PASSWORD': 'root',
+        }
+    }
+
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 

@@ -15,7 +15,7 @@ handlers:
   upload: static/(.*)
 
 env_variables:
-  CLOUD_SQL_CONNECTION_NAME: hangrybirds:us-east1:poll-instance1
+  CLOUD_SQL_CONNECTION_NAME: hangrybirds:us-east1:poll-instance
   DB_USER: root
   DB_PASS: root
   DB_NAME: Restaurants

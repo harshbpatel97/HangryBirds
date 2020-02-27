@@ -17,25 +17,25 @@ def home(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(data=request.POST)
+        #form = UserCreationForm(data=request.POST)
 
-        if form.is_valid():
-            print("Form is submitted")
-            username = request.POST["username"]
-            email = request.POST["email"]
-            password = request.POST["psw"]
-            user = UserTable(username=username, email=email, password=password)
-            user.save()
-            login(request, user)
-            template = loader.get_template("login.html")
-            return HttpResponse(template.render())
+        # if form.is_valid():
+        #print("Form is submitted")
+        username = request.POST["username"]
+        email = request.POST["email"]
+        password = request.POST["psw"]
+        user = UserTable(username=username, email=email, password=password)
+        user.save()
+        template = loader.get_template("login.html")
+        return HttpResponse(template.render())
 
-        else:
-            for msg in form.error_messages:
-                print(form.error_messages[msg])
-            return render(request=request,
-                          template_name="signup.html",
-                          context={"form": form})
+        # else:
+        #     print("Form not submitted")
+        #     for msg in form.error_messages:
+        #         print(form.error_messages[msg])
+        #     return render(request=request,
+        #                   template_name="signup.html",
+        #                   context={"form": form})
     else:
         form = UserCreationForm()
         return render(request=request,
