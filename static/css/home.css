@@ -1,6 +1,6 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
-    background-color: white;
+    background-color: #eeeee1;
     padding: 0;
     margin: 0;
 
@@ -10,12 +10,10 @@ body{
 }
 header{
     display: flex;
-    height: 10vh;
-    background-color: red;
+    height: 8vh;
+    background-color: #FF8033;
     align-items: center;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-bottom-color: black;
+
     color: black;
     padding: 0% 5% 0% 5%;
 }
@@ -123,52 +121,47 @@ h1{
 }
 .cta{
     padding: 50px 0px 0px 0px;
+    display: flex;
+    justify-content: flex-start;
 }
+
 .cta-create {
-    border: 2px solid red;
+    border: 2px solid #FF8033;
     background: transparent;
-    color: red;
+    color: #FF8033;
     width: 150px;
-    height: 50px;
+    height: 35px;
     cursor: pointer;
     font-size: 16px;
+    padding-top: 18px;
     animation: hover 1.5s ease;
-    padding: 5px;
+    text-align: center;
 }
 .cta-login{
-    background: red;
+    display: block;
+    background: #FF8033;
+    height: 35px;
     width: 150px;
-    height: 50px;
     cursor: pointer;
     font-size: 16px;
-    border: none;
+    border: 2px solid #FF8033;
     color: white;
-    margin: 30px 0px 0px 30px;
     animation: hover 1.5s ease;
-    padding: 5px;
+    padding-top: 18px;
+    margin-left: 50px;
+    text-align: center;
 }
-@keyframes drop {
-    0% {
-        opacity: 0;
-        transform: translateY(-80px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0px);
-    }
+.cta-login:hover{
+    background-color: white;
+    border: 2px solid #FF8033;
+    color: black;
 }
-@keyframes hover {
-    0%{
-        opacity: 0;
-        size: 2vh;
-    }
-    100%{
-        opacity: 1;
-        size: 5vh;
+.cta-create:hover{
+    background-color: #FF8033;
+    border: 2px solid white;
+    color: white;
+}
 
-    }
-
-}
 
 
 /* Style the horizontal ruler */
@@ -217,7 +210,7 @@ input[type=text]:focus, input[type=password]:focus {
 }
 
 /* Set a style for all buttons */
-button {
+.signupbtn {
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
@@ -236,12 +229,17 @@ button:hover {
 .cancelbtn {
     padding: 14px 20px;
     background-color: #f44336;
+    transform: translateY(7px);
 }
 
 /* Float cancel and signup buttons and add an equal width */
 .cancelbtn, .signupbtn {
     float: left;
     width: 50%;
+}
+.loginbtn{
+    background-color: #4CAF50;
+    padding: 10px 18px;
 }
 .cancelLoginbtn{
     width: auto;
@@ -258,19 +256,20 @@ button:hover {
         width: 100%;
     }
 }
-.left-side{
+.top-main{
+    display: flex;
     flex: 1;
-    align-content: center;
+    flex-direction: column;
     color: white;
-
+    padding-top: 0;
 }
-.right-side{
+.bottom-main{
     flex: 2;
 }
 .top-restaurants {
     display: flex;
-    flex-direction: column;
-    padding: 5%;
+    flex-direction: row;
+    padding: 2%;
     height: 70vh;
     background-color: #eeeee1;
     justify-content: space-evenly;
@@ -278,28 +277,37 @@ button:hover {
 }
 
 .restaurant {
-    height: 12vh;
+    height: 60vh;
+    width: 38vh;
     display: flex;
+    flex-direction: column;
     flex: 1;
-    text-align: center;
-}
-.top-restaurants a{
-    text-decoration: none;
-    color: white;
-    background-color: #eeeee1;
+    background-color: #FF8033;
+    justify-content: center;
+    align-content: center;
+
 }
 .restaurant:hover {
     background-color: white;
     resize: horizontal;
     transform: scale(1.1);
     transform-origin: center;
+
 }
-
+.restaurant:hover img{
+    animation: up 1.0s ease;
+    transform: translateY(-60px);
+}
+.restaurant:hover .restaurant-text {
+    animation: up 1.0s ease;
+    transform: translateY(-60px);
+}
 .restaurant img {
-    height: 12vh;
-    padding: 0% 10% 0% 10%;
-    align-items: flex-start;
-
+    height: 15vh;
+    width: 15vh;
+    margin-left: auto;
+    margin-right: auto;
+    transform: translateY(50px);
 }
 
 .container{
@@ -309,7 +317,125 @@ button:hover {
 
 .main-information {
     display: flex;
+    flex-direction: column;
     margin: auto;
     text-align: center;
-    width: 90%;
+}
+.restaurant-text{
+    transform: translateY(50px);
+}
+@keyframes up {
+    0%{
+        transform: translateY(0px);
+    }
+    100%{
+        transform: translateY(-60px);
+    }
+}
+.buttons{
+    opacity: 0;
+    transform: translateY(25px);
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    height: 15vh;
+    justify-content: space-around;
+
+}
+.btnRest{
+    transform: translateY(-50px);
+    height: 3.5vh;
+    width: 10vw;
+    background-color: transparent;
+    cursor: pointer;
+    background-color: transparent;
+    color: #FF8033;
+    border: 2px solid #FF8033;
+    animation: hover 1.5s ease;
+    border-radius: 15px;
+}
+.btnRest:hover{
+    background-color: #FF8033;
+    color: white;
+}
+.restaurant:hover .buttons{
+    animation: appear 1.0s ease;
+    opacity: 1;
+}
+.restaurant h1{
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 50px;
+    transform: translateY(-25px);
+}
+@keyframes appear {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+@keyframes drop {
+    0% {
+        opacity: 0;
+        transform: translateY(-80px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+.searchbar button{
+    height: 3.5vh;
+    width: 10vw;
+    background-color: transparent;
+    cursor: pointer;
+    background-color: transparent;
+    color: #FF8033;
+    border: 2px solid #FF8033;
+    border-radius: 15px;
+}
+.searchbar button:hover{
+    background-color: #FF8033;
+    color: white;
+
+}
+@keyframes hover {
+    0%{
+        opacity: 0;
+        size: 2vh;
+    }
+    100%{
+        opacity: 1;
+        size: 5vh;
+
+    }
+
+}
+@keyframes smallMoveUp {
+    0% {
+        transform: translateY(0px);
+        font-size: 50px;
+    }
+    100%{
+        transform: translateY(-35px);
+        font-size: 25px;
+    }
+
+}
+h2{
+    padding-top: 50px;
+}
+.search-bar-bar{
+    width: 40vw;
+    font-size: 20px;
+}
+.searchbar{
+    padding-top: 25px;
+    justify-content: center;
+}
+select{
+    font-size: 16px;
 }

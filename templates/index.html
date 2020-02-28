@@ -10,7 +10,7 @@
 </head>
 <body>
 <header>
-    <h1>You have successfully logged in</h1>
+    <h1>Welcome back, User!</h1>
     <nav>
         <div class="navbar">
             <a href="index.html">Home</a>
@@ -31,56 +31,85 @@
 </header>
 <main>
     <section class="main-information">
-        <div class="left-side">
+        <div class="searchbar">
+            <h2>Search</h2><br>
+            <div class="line-search">
+                <input  class="search-bar-bar" placeholder="Search...">
+                <select name="search-select" id="search-select" >
+                    <option value="restaurant">Restaurant</option>
+                    <option value="food">Food Item</option>
+                </select>
+                
+                <button type="submit">Search</button>
+            </div>
+        </div>
+        <div class="top-main">
             <h2>Top Restaurants Around Charlotte!</h2>
             <div class="top-restaurants">
 
-                <a href="#halal">
                 <div class="restaurant" id="top-1">
-                        <img src="{% static "images/Halal.jpg" %}" alt="Halal">
+                    <img src="{% static "images/tb.png" %}" alt="Taco Bell">
                         <div class="restaurant-text">
-                            <h3>Halal</h3>
-
+                            <h3>Taco Bell</h3>
+                            <p>8661 JW Clay Blvd,<br>Charlotte, NC 28262</p>
                         </div>
+                    <div class="buttons">
+                        <button type="button" class="btnRest">More Information</button>
+                        <button type="button" class="btnRest">Show Reviews</button>
+                        <button type="button" class="btnRest">Write a review</button>
                     </div>
-                </a>
-                <a href="#cfa">
+                    </div>
                     <div class="restaurant" id="top-2">
-                        <img src="{% static "images/cfa.png" %}" alt="Chick-Fil-A">
+                        <img src="{% static "images/cfa1.jpg" %}" alt="Chick-Fil-A">
                         <div class="restaurant-text">
                             <h3>Chick-Fil-A</h3>
-
+                            <p> 8700 University Executive Park Dr,<br> Charlotte, NC 28262</p>
+                        </div>
+                        <div class="buttons">
+                            <button type="button" class="btnRest">More Information</button>
+                            <button type="button" class="btnRest">Show Reviews</button>
+                            <button type="button" class="btnRest">Write a review</button>
                         </div>
                     </div>
-                </a>
-                <a href="#tijuana">
                     <div class="restaurant" id="top-3">
-                        <img src="{% static "images/tf.jpg" %}" alt="Tijuana Flats">
+                        <img src="{% static "images/tf.png" %}" alt="Tijuana Flats">
                         <div class="restaurant-text">
                             <h3>Tijuana Flats</h3>
-
+                            <p>8926, J M Keynes Dr ste B,<br> Charlotte, NC 28262</p>
+                        </div>
+                        <div class="buttons">
+                            <button type="button" class="btnRest">More Information</button>
+                            <button type="button" class="btnRest">Show Reviews</button>
+                            <button type="button" class="btnRest">Write a review</button>
                         </div>
                     </div>
-                </a>
-                <a href="#wendys">
                     <div class="restaurant" id="top-4">
                         <img src="{% static "images/wendys.png" %}" alt="Wendy's">
                         <div class="restaurant-text">
                             <h3>Wendy's</h3>
+                            <p>10235 University City Blvd Dr,<br> Charlotte, NC 28213</p>
+                        </div>
+                        <div class="buttons">
+                            <button type="button" class="btnRest">More Information</button>
+                            <button type="button" class="btnRest">Show Reviews</button>
+                            <button type="button" class="btnRest">Write a review</button>
                         </div>
                     </div>
-                </a>
-                <a href="#burger-king">
                     <div class="restaurant" id="top-5">
-                        <img src="{% static "images/BK.jpg" %}" alt="Burger King">
+                        <img src="{% static "images/bki.png" %}" alt="Burger King">
                         <div class="restaurant-text">
                             <h3>Burger King</h3>
+                            <p>8431 N Tryon St,<br> Charlotte, NC 28262</p>
+                        </div>
+                        <div class="buttons">
+                            <button type="button" class="btnRest">More Information</button>
+                            <button type="button" class="btnRest">Show Reviews</button>
+                            <button type="button" class="btnRest">Write a review</button>
                         </div>
                     </div>
-                </a>
             </div>
         </div>
-        <div class="right-side">
+        <div class="bottom-main">
             <h2></h2>
             <div class="favorite-restaurants"></div>
         </div>

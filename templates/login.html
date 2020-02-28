@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link href= "{% static "css/home.css" %}"  type="text/css" rel="stylesheet" />
+    <link href= "{% static "css/home.css" %}"  type="text/css" rel="stylesheet" />>
 </head>
 <body>
 <header>
@@ -29,27 +29,29 @@
 </header>
 <main>
     {% block content %}
-        <form method="POST" action="/login_view/" >
-            {% csrf_token %}
-             <div class="container">
+        <div class="container">
+            <form method="POST" action="/login_view/" >
+                {% csrf_token %}
+                <h1>Login</h1>
+                <p>Please enter your username and password</p>
+                <hr>
                 <label for="username"><b>Username</b></label>
                 <input type="text" placeholder="Enter Username" name="uname" required>
 
                 <label for="psw"><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="psw" required>
 
-                <button class="loginbtn" type="submit">Login</button>
+                 <button class="loginbtn" type="submit">Login</button>
 
                 <label>
                     <input type="checkbox" checked="checked" name="remember"> Remember me
                 </label>
-             </div>
-        </form>
+            </form>
+        </div>
     {% endblock %}
-
     <br>
     <div class="container">
-        <a href="{% url 'home' %}" class="cancelLoginbtn">Cancel</a>
+       <a href="{% url 'home' %}" class="cancelLoginbtn">Cancel</a>
         <span class="psw">Forgot <a href="#">password?</a></span>
     </div>
 </main>
