@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link href= "{% static "css/home.css" %}"  type="text/css" rel="stylesheet" />>
+    <link href= "{% static "css/home.css" %}"  type="text/css" rel="stylesheet" />
 </head>
 <body>
 <header>
     <h1>Welcome to HangryBirds!</h1>
     <nav>
         <div class="navbar">
-            <a href="index.html">Home</a>
+            <a href="{% url 'home' %}">Home</a>
             <a href="#news">News</a>
             <div class="dropdown">
                 <button class="dropbtn">Search</button>
@@ -21,7 +21,6 @@
                     <a href="#">Editor's Picks</a>
                 </div>
             </div>
-            <a href="home.html">My Account</a>
         </div>
     </nav>
 
@@ -30,7 +29,7 @@
 <main>
     {% block content %}
         <div class="container">
-            <form method="POST" action="/login_view/" >
+            <form method="POST" action="{% url 'index' %}" >
                 {% csrf_token %}
                 <h1>Login</h1>
                 <p>Please enter your username and password</p>
@@ -41,7 +40,7 @@
                 <label for="psw"><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="psw" required>
 
-                 <button class="loginbtn" type="submit">Login</button>
+                 <a href="{% url 'index' %}" class="loginbtn" type="submit">Login</a>
 
                 <label>
                     <input type="checkbox" checked="checked" name="remember"> Remember me
