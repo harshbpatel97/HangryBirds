@@ -27,6 +27,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'hangrybirds.appspot.com',
     '127.0.0.1',
+    '.amazonaws.com'
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
