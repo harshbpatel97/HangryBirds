@@ -28,25 +28,20 @@
 </header>
 <main>
     {% block content %}
-        <div class="container">
-            <form method="POST" action="{% url 'index' %}" >
-                {% csrf_token %}
+        <form method="POST" action="/login_view/" >
+            {% csrf_token %}
+            <div class="container">
                 <h1>Login</h1>
                 <p>Please enter your username and password</p>
                 <hr>
                 <label for="username"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
-
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
-
-                 <a href="{% url 'index' %}" class="loginbtn" type="submit">Login</a>
-
-                <label>
-                    <input type="checkbox" checked="checked" name="remember"> Remember me
-                </label>
-            </form>
-        </div>
+                <input type="text" placeholder="Enter Username" name="username" required>
+    
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" required>
+                <button type="submit" class="loginbtn" value="Login">Login</button>
+            </div>    
+        </form>
     {% endblock %}
     <br>
     <div class="container">

@@ -8,6 +8,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import render, redirect
 from django.contrib import auth
 from .models import UserTable
+from django.views.decorators.csrf import csrf_exempt
 
 
 def home(request):
@@ -17,52 +18,31 @@ def home(request):
 
 def signup(request):
     if request.method == 'POST':
-        # form = UserCreationForm(data=request.POST)
-
-        # if form.is_valid():
-        # print("Form is submitted")
-        username = request.POST["username"]
-        email = request.POST["email"]
-        password = request.POST["psw"]
-        user = UserTable(username=username, email=email, password=password)
-        user.save()
-        template = loader.get_template("login.html")
+        newUser = UserTable()
+        newUser.username = request.POST['username']
+        newUser.email = request.POST['email']
+        newUser.password = request.POST['password']
+        newUser.save()
+        template = loader.get_template("home.html")
         return HttpResponse(template.render())
-
-        # else:
-        #     print("Form not submitted")
-        #     for msg in form.error_messages:
-        #         print(form.error_messages[msg])
-        #     return render(request=request,
-        #                   template_name="signup.html",
-        #                   context={"form": form})
+        
     else:
         form = UserCreationForm()
-        return render(request=request,
-                      template_name="signup.html",
-                      context={"form": form})
+        return render(request, 'signup.html', {'form': form})
 
 
 def login(request):
-    template = loader.get_template("login.html")
-    return HttpResponse(template.render())
+     template = loader.get_template("login.html")
+     return HttpResponse(template.render())
 
-
+@csrf_exempt
 def login_view(request):
     if request.method == 'POST':
-        username = request.POST['uname']
-        password = request.POST['psw']
-        user = authenticate(username=username, password=password)
-        if user:
-            if user.is_active:
-                # correct password, and the user is marked "active"
-                # redirect to the success page
-                print("User exists")
-                template = loader.get_template("index.html")
-                return HttpResponse(template.render())
-            else:
-                return HttpResponse("Your account was inactive")
-
+        username = request.POST['username']
+        password = request.POST['password']
+        if UserTable.objects.filter(username=username, password=password).exists():
+            template = loader.get_template("index.html")
+            return HttpResponse(template.render())
         else:
             print("Someone tried to login and failed.")
             print("They used username: {} and password: {}".format(username, password))
