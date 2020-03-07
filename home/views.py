@@ -20,11 +20,17 @@ def signup(request):
     if request.method == 'POST':
         newUser = UserTable()
         newUser.username = request.POST['username']
-        newUser.email = request.POST['email']
-        newUser.password = request.POST['password']
-        newUser.save()
-        template = loader.get_template("home.html")
-        return HttpResponse(template.render())
+        if UserTable.objects.filter(username=newUser.username).exists():
+            print("Username already exists")
+            return HttpResponse("Username already exists")
+        
+        else:
+            newUser.email = request.POST['email']
+            newUser.password = request.POST['password']
+            newUser.save()
+            template = loader.get_template("home.html")
+            return HttpResponse(template.render())
+           
         
     else:
         form = UserCreationForm()
