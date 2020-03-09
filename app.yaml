@@ -19,3 +19,6 @@ env_variables:
   DB_USER: root
   DB_PASS: root
   DB_NAME: Restaurants
+
+beta_settings:
+  cloud_sql_instances: hangrybirds:us-east1:poll-instance
