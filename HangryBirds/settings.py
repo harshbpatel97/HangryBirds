@@ -116,7 +116,7 @@ if os.getenv('GAE_INSTANCE'):
     pass
 else:
     DATABASES['default']['HOST'] = '127.0.0.1'
-    DATABASES['default']['PORT'] =  '8080'
+    DATABASES['default']['PORT'] =  '5432'
 # [END dbconfig]
 
 
