@@ -31,4 +31,5 @@ urlpatterns = [
                   url(r'^login/', views.login, name="login"),
                   url(r'^login_view/', views.login_view, name="login_view"),
                   url(r'^index', TemplateView.as_view(template_name='index.html'), name='index'),
+                  url(r'^logout/', views.logout, name = 'logout'),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

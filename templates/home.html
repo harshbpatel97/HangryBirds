@@ -5,7 +5,6 @@
     <title>Hangry Birds</title>
     <meta name="description" content="Hangry Birds" />
     <meta charset="UTF-8">
-
     <link href="{% static "css/home.css" %}" type="text/css" rel="stylesheet" />
 </head>
 <body>
@@ -25,11 +24,19 @@
             </div>
         </div>
     </nav>
-
-
 </header>
 <main>
-
+    {% if messages %}
+        <div class="alert">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+           <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+           </ul>
+        </div>
+       
+    {% endif %}
     <section class="presentation">
         <div class="introduction">
             <div class="intro-text">

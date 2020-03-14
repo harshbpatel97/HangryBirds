@@ -23,10 +23,20 @@
             </div>
         </div>
     </nav>
-
-
 </header>
 <main>
+    {% if messages %}
+        <div class="alert">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+           <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+           </ul>
+        </div>
+       
+    {% endif %}
+    
     {% block content %}
         <form method="POST" action="/signup/">
             {% csrf_token %}
@@ -63,7 +73,7 @@
                 <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
 
                 <div class="clearfix">
-                    <button type="button" class="cancelbtn" onclick="location.href={% url 'home' %}">Cancel</button>
+                    <button type="button" class="cancelbtn" onclick="window.location.href='{% url 'home' %}'">Cancel</button>
                     <button type="submit" class="signupbtn">Sign Up</button>
                 </div>
             </div>

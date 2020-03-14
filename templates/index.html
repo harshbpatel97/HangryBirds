@@ -10,7 +10,7 @@
 </head>
 <body>
 <header>
-    <h1>Welcome back, User!</h1>
+    <h1>Welcome back, {{username}}!</h1>
     <nav>
         <div class="navbar">
             <a href="index.html">Home</a>
@@ -23,7 +23,7 @@
                     <a href="#">Editor's Picks</a>
                 </div>
             </div>
-            <a href={% url 'home' %}>Logout</a>
+            <a href={% url 'logout' %}>Logout</a>
         </div>
     </nav>
 
