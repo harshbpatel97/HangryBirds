@@ -10,6 +10,7 @@ from django.contrib import auth, sessions
 from .models import UserTable
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
+from passlib.hash import pbkdf2_sha256
 
 
 def home(request):
@@ -29,7 +30,8 @@ def signup(request):
         
         else:
             newUser.email = request.POST['email']
-            newUser.password = request.POST['password']
+            password = request.POST['password']
+            newUser.password = pbkdf2_sha256.encrypt(password, rounds=12000, salt_size=32)
             newUser.save()
             template = loader.get_template("home.html")
             return HttpResponse(template.render())
@@ -52,9 +54,12 @@ def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        if UserTable.objects.filter(username=username, password=password).exists():
-            request.session['username'] = username
-            return render(request, "index.html", {"username" : username})
+        users = UserTable.objects.filter(username=username)
+        user = users.first()
+        if user != None:
+            if pbkdf2_sha256.verify(password,user.password):
+                request.session['username'] = username
+                return render(request, "index.html", {"username" : username})
         else:
             print("Someone tried to login and failed.")
             print("They used username: {} and password: {}".format(username, password))
