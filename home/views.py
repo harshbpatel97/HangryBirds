@@ -11,7 +11,7 @@ from .models import UserTable, RestaurantTable, MenuTable, ReviewTable
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from passlib.hash import pbkdf2_sha256
-
+import datetime
 
 def home(request):
     template = loader.get_template("home.html")
@@ -94,12 +94,31 @@ def showReview(request, parameter):
         rest_ID = parameter
         restData = RestaurantTable.objects.get(rest_ID=rest_ID)
         menuData = MenuTable.objects.filter(restObj=rest_ID)
-        reviewData = ReviewTable.objects.filter(restObj=rest_ID)
+        # reviewData = ReviewTable.objects.filter(restObj=rest_ID)
         restVar = {
             "rest_ID": restData,
             "username": username,
             "menu_ID": menuData,
-            "review_ID": reviewData,
+            # "review_ID": reviewData,
         }
         return render(request, 'showReview.html', restVar)
+
+def writeReview(request, parameter):
+    if request.method == 'GET':
+        newReview = ReviewTable()
+        username = request.session['username']
+        newReview.review = request.GET['reviewText']
+        newReview.rating = request.GET['rating']
+        newReview.timestamp = datetime.datetime.now()
+        newReview.userObj_id = UserTable.objects.filter(username=username)
+        newReview.menuObj_id = parameter
+        newReview.restObj_id = MenuTable.objects.filter(item_ID=parameter).first().restObj
+        newReview.save()
+        template = loader.get_template("showReview.html")
+        return HttpResponse(template.render())
+    
+    else:
+        template = loader.get_template("home.html")
+        return HttpResponse(template.render())
+    
         

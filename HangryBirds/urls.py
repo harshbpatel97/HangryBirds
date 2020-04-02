@@ -33,4 +33,5 @@ urlpatterns = [
                   url(r'^index', TemplateView.as_view(template_name='index.html'), name='index'),
                   url(r'^logout/', views.logout, name = 'logout'),
                   url(r'^showReview/(?P<parameter>[\w-]+)', views.showReview, name="showReview"),
+                  url(r'^writeReview/(?P<parameter>[\w-]+)', views.writeReview, name="writeReview"),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

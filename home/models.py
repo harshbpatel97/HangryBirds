@@ -30,13 +30,12 @@ class MenuTable(models.Model):
         return self.item_ID
 
 class ReviewTable(models.Model):
-    review_ID = models.IntegerField(primary_key=True)
     userObj = models.ForeignKey(UserTable, on_delete=models.CASCADE)
     menuObj = models.ForeignKey(MenuTable, on_delete=models.CASCADE)
     restObj = models.ForeignKey(RestaurantTable, on_delete=models.CASCADE)
     review = models.CharField(max_length=1000)
     timestamp = models.DateTimeField(auto_now=True, editable=True)
     rating = models.IntegerField()
-    
+
     def __str__(self):
-        return self.review_ID
+        return self.review
