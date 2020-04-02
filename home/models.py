@@ -38,4 +38,4 @@ class ReviewTable(models.Model):
     rating = models.IntegerField()
 
     def __str__(self):
-        return self.review
+        return str(self.review)

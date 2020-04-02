@@ -46,7 +46,6 @@ def login(request):
     restData = RestaurantTable.objects.all()
     if request.session.has_key('username'):
         username = request.session['username']
-        # print(restData)
         restVar = {
             "rest_ID": restData,
             "username": username
@@ -105,15 +104,15 @@ def showReview(request, parameter):
         return render(request, 'showReview.html', restVar)
 
 def writeReview(request, parameter):
-    if request.method == 'GET':
+    if request.method == 'POST':
         newReview = ReviewTable()
         username = request.session['username']
-        newReview.review = request.GET['reviewText']
-        newReview.rating = request.GET['rating']
+        newReview.review = request.POST['reviewText']
+        newReview.rating = request.POST['rating']
         newReview.timestamp = datetime.datetime.now()
-        newReview.userObj_id = UserTable.objects.filter(username=username)
-        newReview.menuObj_id = parameter
-        newReview.restObj_id = MenuTable.objects.filter(item_ID=parameter).first().restObj_id
+        newReview.userObj = UserTable.objects.get(username=username)
+        newReview.menuObj = MenuTable.objects.get(item_ID=parameter)
+        newReview.restObj = MenuTable.objects.get(item_ID=parameter).restObj
         newReview.save()
         template = loader.get_template("showReview.html")
         return HttpResponse(template.render())

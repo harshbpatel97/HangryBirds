@@ -53,7 +53,7 @@
                 {% endfor %}
                  <h2>Write a Review</h2>
                  {% block content %}
-                    <form method="GET" action="{% url 'writeReview' parameter=m.item_ID %}" >
+                    <form method="POST" action="{% url 'writeReview' parameter=m.item_ID %}" >
                         {% csrf_token %}
                         <div>
                             <textarea id="reviewText" name="reviewText" rows="5" cols="50" max_length="900"></textarea>
