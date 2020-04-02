@@ -43,9 +43,10 @@ def signup(request):
 
 
 def login(request):
+    restData = RestaurantTable.objects.all()
     if request.session.has_key('username'):
         username = request.session['username']
-        restData = RestaurantTable.objects.all()
+        # print(restData)
         restVar = {
             "rest_ID": restData,
             "username": username
@@ -112,7 +113,7 @@ def writeReview(request, parameter):
         newReview.timestamp = datetime.datetime.now()
         newReview.userObj_id = UserTable.objects.filter(username=username)
         newReview.menuObj_id = parameter
-        newReview.restObj_id = MenuTable.objects.filter(item_ID=parameter).first().restObj
+        newReview.restObj_id = MenuTable.objects.filter(item_ID=parameter).first().restObj_id
         newReview.save()
         template = loader.get_template("showReview.html")
         return HttpResponse(template.render())
