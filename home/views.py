@@ -43,15 +43,13 @@ def signup(request):
 
 
 def login(request):
-    restData = RestaurantTable.objects.all()
     if request.session.has_key('username'):
+        print("in if condition")
         username = request.session['username']
-        restVar = {
-            "rest_ID": restData,
-            "username": username
-        }
-        return render(request, 'index.html', restVar)
+       
+        return render(request, 'index.html', {'username': username})
     else:
+        print("in else condition")
         return render(request, 'login.html')
 
 @csrf_exempt
@@ -64,7 +62,12 @@ def login_view(request):
         if user != None:
             if pbkdf2_sha256.verify(password,user.password):
                 request.session['username'] = username
-                return render(request, "index.html", {"username" : username})
+                restData = RestaurantTable.objects.all()
+                restVar = {
+                    "rest_ID": restData,
+                    "username": username
+                }
+                return render(request, "index.html", restVar)
         else:
             print("Someone tried to login and failed.")
             print("They used username: {} and password: {}".format(username, password))
