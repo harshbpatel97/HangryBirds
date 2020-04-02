@@ -94,12 +94,12 @@ def showReview(request, parameter):
         rest_ID = parameter
         restData = RestaurantTable.objects.get(rest_ID=rest_ID)
         menuData = MenuTable.objects.filter(restObj=rest_ID)
-        # reviewData = ReviewTable.objects.filter(restObj=rest_ID)
+        reviewData = ReviewTable.objects.filter(restObj=rest_ID)
         restVar = {
             "rest_ID": restData,
             "username": username,
             "menu_ID": menuData,
-            # "review_ID": reviewData,
+            "review_ID": reviewData,
         }
         return render(request, 'showReview.html', restVar)
 
