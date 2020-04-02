@@ -47,68 +47,81 @@
             <h2>Top Restaurants Around Charlotte!</h2>
             <div class="top-restaurants">
 
-                <div class="restaurant" id="top-1">
-                    <img src="{% static "images/tb.png" %}" alt="Taco Bell">
-                        <div class="restaurant-text">
-                            <h3>Taco Bell</h3>
-                            <p>8661 JW Clay Blvd,<br>Charlotte, NC 28262</p>
-                        </div>
-                    <div class="buttons">
-                        <button type="button" class="btnRest">More Information</button>
-                        <button type="button" class="btnRest">Show Reviews</button>
-                        <button type="button" class="btnRest">Write a review</button>
+        <!--        <div class="restaurant" id="top-1">-->
+        <!--            <img src="{% static "images/tb.png" %}" alt="Taco Bell">-->
+        <!--                <div class="restaurant-text">-->
+        <!--                    <h3>Taco Bell</h3>-->
+        <!--                    <p>8661 JW Clay Blvd,<br>Charlotte, NC 28262</p>-->
+        <!--                </div>-->
+        <!--            <div class="buttons">-->
+        <!--                <button type="button" class="btnRest">More Information</button>-->
+        <!--                <button type="button" class="btnRest">Show Reviews</button>-->
+        <!--                <button type="button" class="btnRest">Write a review</button>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--            <div class="restaurant" id="top-2">-->
+        <!--                <img src="{% static "images/cfa1.png" %}" alt="Chick-Fil-A">-->
+        <!--                <div class="restaurant-text">-->
+        <!--                    <h3>Chick-Fil-A</h3>-->
+        <!--                    <p> 8700 University Executive Park Dr,<br> Charlotte, NC 28262</p>-->
+        <!--                </div>-->
+        <!--                <div class="buttons">-->
+        <!--                    <button type="button" class="btnRest">More Information</button>-->
+        <!--                    <button type="button" class="btnRest">Show Reviews</button>-->
+        <!--                    <button type="button" class="btnRest">Write a review</button>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--            <div class="restaurant" id="top-3">-->
+        <!--                <img src="{% static "images/tf.png" %}" alt="Tijuana Flats">-->
+        <!--                <div class="restaurant-text">-->
+        <!--                    <h3>Tijuana Flats</h3>-->
+        <!--                    <p>8926, J M Keynes Dr ste B,<br> Charlotte, NC 28262</p>-->
+        <!--                </div>-->
+        <!--                <div class="buttons">-->
+        <!--                    <button type="button" class="btnRest">More Information</button>-->
+        <!--                    <button type="button" class="btnRest">Show Reviews</button>-->
+        <!--                    <button type="button" class="btnRest">Write a review</button>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--            <div class="restaurant" id="top-4">-->
+        <!--                <img src="{% static "images/wendys.png" %}" alt="Wendy's">-->
+        <!--                <div class="restaurant-text">-->
+        <!--                    <h3>Wendy's</h3>-->
+        <!--                    <p>10235 University City Blvd Dr,<br> Charlotte, NC 28213</p>-->
+        <!--                </div>-->
+        <!--                <div class="buttons">-->
+        <!--                    <button type="button" class="btnRest">More Information</button>-->
+        <!--                    <button type="button" class="btnRest">Show Reviews</button>-->
+        <!--                    <button type="button" class="btnRest">Write a review</button>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--            <div class="restaurant" id="top-5">-->
+        <!--                <img src="{% static "images/bki.png" %}" alt="Burger King">-->
+        <!--                <div class="restaurant-text">-->
+        <!--                    <h3>Burger King</h3>-->
+        <!--                    <p>8431 N Tryon St,<br> Charlotte, NC 28262</p>-->
+        <!--                </div>-->
+        <!--                <div class="buttons">-->
+        <!--                    <button type="button" class="btnRest">More Information</button>-->
+        <!--                    <button type="button" class="btnRest">Show Reviews</button>-->
+        <!--                    <button type="button" class="btnRest">Write a review</button>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--    </div>-->
+        <!--</div>-->
+     
+        {% for r in rest_ID %}
+          <div class="restaurant" id={{r.rest_ID}}>
+                       <div class="restaurant-text">
+                        <h3>{{ r.rest_name}}</h3>
+                        <p>{{ r.rest_loc}}</p>
+                        <p>{{ r.rest_contact}}</p>
                     </div>
-                    </div>
-                    <div class="restaurant" id="top-2">
-                        <img src="{% static "images/cfa1.png" %}" alt="Chick-Fil-A">
-                        <div class="restaurant-text">
-                            <h3>Chick-Fil-A</h3>
-                            <p> 8700 University Executive Park Dr,<br> Charlotte, NC 28262</p>
-                        </div>
-                        <div class="buttons">
-                            <button type="button" class="btnRest">More Information</button>
-                            <button type="button" class="btnRest">Show Reviews</button>
-                            <button type="button" class="btnRest">Write a review</button>
-                        </div>
-                    </div>
-                    <div class="restaurant" id="top-3">
-                        <img src="{% static "images/tf.png" %}" alt="Tijuana Flats">
-                        <div class="restaurant-text">
-                            <h3>Tijuana Flats</h3>
-                            <p>8926, J M Keynes Dr ste B,<br> Charlotte, NC 28262</p>
-                        </div>
-                        <div class="buttons">
-                            <button type="button" class="btnRest">More Information</button>
-                            <button type="button" class="btnRest">Show Reviews</button>
-                            <button type="button" class="btnRest">Write a review</button>
-                        </div>
-                    </div>
-                    <div class="restaurant" id="top-4">
-                        <img src="{% static "images/wendys.png" %}" alt="Wendy's">
-                        <div class="restaurant-text">
-                            <h3>Wendy's</h3>
-                            <p>10235 University City Blvd Dr,<br> Charlotte, NC 28213</p>
-                        </div>
-                        <div class="buttons">
-                            <button type="button" class="btnRest">More Information</button>
-                            <button type="button" class="btnRest">Show Reviews</button>
-                            <button type="button" class="btnRest">Write a review</button>
-                        </div>
-                    </div>
-                    <div class="restaurant" id="top-5">
-                        <img src="{% static "images/bki.png" %}" alt="Burger King">
-                        <div class="restaurant-text">
-                            <h3>Burger King</h3>
-                            <p>8431 N Tryon St,<br> Charlotte, NC 28262</p>
-                        </div>
-                        <div class="buttons">
-                            <button type="button" class="btnRest">More Information</button>
-                            <button type="button" class="btnRest">Show Reviews</button>
-                            <button type="button" class="btnRest">Write a review</button>
-                        </div>
-                    </div>
+                <div class="buttons">
+                    <a href="{% url 'showReview' parameter=r.rest_ID %}" class="btnRest">Show/Write Reviews</a>
+                </div>
             </div>
-        </div>
+         {% endfor%}
         <div class="bottom-main">
             <h2></h2>
             <div class="favorite-restaurants"></div>

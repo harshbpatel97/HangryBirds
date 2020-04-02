@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import render, redirect
 from django.contrib import auth, sessions
-from .models import UserTable
+from .models import UserTable, RestaurantTable, MenuTable, ReviewTable
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from passlib.hash import pbkdf2_sha256
@@ -45,7 +45,12 @@ def signup(request):
 def login(request):
     if request.session.has_key('username'):
         username = request.session['username']
-        return render(request, 'index.html', {"username" : username})
+        restData = RestaurantTable.objects.all()
+        restVar = {
+            "rest_ID": restData,
+            "username": username
+        }
+        return render(request, 'index.html', restVar)
     else:
         return render(request, 'login.html')
 
@@ -82,3 +87,19 @@ def logout(request):
    except:
       pass
    return render(request, "home.html")
+
+def showReview(request, parameter):
+    if request.session.has_key('username'):
+        username = request.session['username']
+        rest_ID = parameter
+        restData = RestaurantTable.objects.get(rest_ID=rest_ID)
+        menuData = MenuTable.objects.filter(restObj=rest_ID)
+        reviewData = ReviewTable.objects.filter(restObj=rest_ID)
+        restVar = {
+            "rest_ID": restData,
+            "username": username,
+            "menu_ID": menuData,
+            "review_ID": reviewData,
+        }
+        return render(request, 'showReview.html', restVar)
+        

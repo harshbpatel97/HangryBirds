@@ -1,0 +1,67 @@
+{% load static %}
+<!doctype HTML>
+<html lang="en">
+<head>
+    <title>Hangry Birds</title>
+    <meta name="description" content="Hangry Birds" />
+    <meta charset="UTF-8">
+    <link href= "{% static "css/home.css" %}"  type="text/css" rel="stylesheet" />
+</head>
+<body>
+<header>
+   <h1>Welcome, {{username}}!</h1>
+    <nav>
+        <div class="navbar">
+            <a href="#">Home</a>
+            <a href="#news">News</a>
+            <div class="dropdown">
+                <button class="dropbtn">Search</button>
+                <div class="dropdown-content">
+                    <a href="#">By Restaurant</a>
+                    <a href="#">By Item</a>
+                    <a href="#">Editor's Picks</a>
+                </div>
+            </div>
+            <a href={% url 'logout' %}>Logout</a>
+        </div>
+    </nav>
+
+
+</header>
+<main>
+    <section class="template-main">
+        <div class="left-template">
+            <!--<img src="tb.png" alt="Taco Bell">-->
+            <h2>{{ rest_ID.rest_name }}</h2>
+            <h3>{{ rest_ID.rest_loc }}</h3>
+            <h3>{{ rest_ID.rest_contact }}</h3>
+            <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda blanditiis dolore, eaque in labore necessitatibus-->
+            <!--    odit quia quisquam sit velit!</p>-->
+        </div>
+        
+        <div class="right-template">
+            {% for m in menu_ID %}
+                <h2>{{ m.item_name }}</h2>
+                <h2>Reviews</h2>
+                {% for r in review_ID %}
+                    {% if r.menuObj_id == m.item_ID %}
+                        <h4>{{ r.userObj.username }}</h4>
+                        <p>{{ r.review }}</p>
+                        <p>{{ r.timestamp }}</p>
+                        <p>{{ r.rating }}</p>
+                    {% endif %}
+                {% endfor %}
+                 <a href="#" class="btnRest">Write Reviews</a>
+              {% endfor %}
+            <!--<h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, repudiandae?</h3>-->
+            
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+</body>
