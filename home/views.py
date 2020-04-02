@@ -44,12 +44,14 @@ def signup(request):
 
 def login(request):
     if request.session.has_key('username'):
-        print("in if condition")
         username = request.session['username']
-       
-        return render(request, 'index.html', {'username': username})
+        restData = RestaurantTable.objects.all()
+        restVar = {
+            "rest_ID": restData,
+            "username": username
+        }
+        return render(request, 'index.html', restVar)
     else:
-        print("in else condition")
         return render(request, 'login.html')
 
 @csrf_exempt
@@ -117,9 +119,9 @@ def writeReview(request, parameter):
         newReview.menuObj = MenuTable.objects.get(item_ID=parameter)
         newReview.restObj = MenuTable.objects.get(item_ID=parameter).restObj
         newReview.save()
-        template = loader.get_template("showReview.html")
-        return HttpResponse(template.render())
-    
+        messages.info(request, 'Thanks for submitting the review')
+        return login(request)
+        
     else:
         template = loader.get_template("home.html")
         return HttpResponse(template.render())
