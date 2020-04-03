@@ -113,6 +113,7 @@ h1{
     display: flex;
     justify-content: center;
     height: 60vh;
+    padding-left: 25px;
 }
 .cover img {
     height: 100%;
@@ -462,5 +463,94 @@ select{
 }
 
 .info {
+    color: white;
+}
+
+.toggle{
+    margin-top: 4px;
+    margin-left: 25%;
+    background-color: rgba(0,0,0,0.78);
+    color: white;
+    cursor: pointer;
+    width: 50vw;
+    height: 50px;
+    border: none;
+    text-align: left;
+    font-family: 'Comic Neue', cursive;
+    font-size: 25px;
+    text-align: center;
+}
+
+.active, .toggle:hover {
+  background-color: #FF8033; 
+}
+
+.panel {
+  margin-left: 25%;
+  border: 2px solid #FF8033;
+  display: none;
+  width: 48.75vw;
+  padding-left: 20px;
+  overflow: hidden;
+
+}
+.panel h3{
+    text-align: center;
+    font-size: 25px;
+}
+.oldReview{
+    width: 30vw;
+    padding-bottom: 50px;
+    margin: auto;
+    margin-top: 25px;
+    padding-left: 20px;
+    border: 2px solid #FF8033;
+    box-shadow: 5px 5px #FF8033;
+}
+.checked{
+    color: #FF8033;
+}
+.right-template h2{
+    text-align: center;
+    font-size: 35px;
+}
+.writeForm{
+    margin-left: 25%;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+.btnWriteSubmit{
+    color: #FF8033;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 3.5vh;
+    width: 40%;
+    margin-left: 30%;
+    cursor: pointer;
+    background-color: transparent;
+    border: 2px solid #FF8033;
+    border-radius: 15px;
+}
+.btnWriteSubmit:hover{
+    background-color: #FF8033;
+    color: white;
+}
+.left-template{
+    text-align: center;
+}
+#caption{
+    text-align: center;
+}
+.btnShow{
+    color: #FF8033;
+    background-color: transparent;
+    cursor: pointer;
+    border: 2px solid #FF8033;
+    border-radius: 15px;
+    padding: 5px 10px 5px 10px;
+}
+.btnShow:hover{
+    background-color: #FF8033;
     color: white;
 }

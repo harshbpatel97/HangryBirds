@@ -5,6 +5,8 @@
     <title>Hangry Birds</title>
     <meta name="description" content="Hangry Birds" />
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap" rel="stylesheet">
     <link href= "{% static "css/home.css" %}"  type="text/css" rel="stylesheet" />
 </head>
 <body>
@@ -40,30 +42,72 @@
         </div>
         
         <div class="right-template">
+            <h2>MENU</h2>
+            <p id="caption">(Click an item below to view and write reviews!)</p>
             {% for m in menu_ID %}
-                <h2>{{ m.item_name }}</h2>
-                <h2>Reviews</h2>
+                <button class="toggle">{{ m.item_name }}</button>
+                <div class="panel">
+                    <h3>Reviews</h3>
                 {% for r in review_ID %}
                     {% if r.menuObj_id == m.item_ID %}
+                    <div class="oldReview">
                         <h4>{{ r.userObj.username }}</h4>
                         <p>{{ r.review }}</p>
                         <p>{{ r.timestamp }}</p>
-                        <p>{{ r.rating }}</p>
+                        {% if r.rating == 1 %}
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        {% elif r.rating == 2 %}
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        {% elif r.rating == 3 %}
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        {% elif r.rating == 4 %}
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                        {% elif r.rating == 5 %}
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                        {% endif %}
+                    </div>
                     {% endif %}
+                   
                 {% endfor %}
-                 <h2>Write a Review</h2>
+                
+                 <h3>Write a Review</h3>
                  {% block content %}
                     <form method="POST" action="{% url 'writeReview' parameter=m.item_ID %}" >
                         {% csrf_token %}
-                        <div>
+                        <div class="writeForm">
+                            <label for="reviewText">Your Review:</label>
                             <textarea id="reviewText" name="reviewText" rows="5" cols="50" max_length="900"></textarea>
-                            <label for="rating">Rating</label>
+                            <label for="rating">Rating:</label>
                             <input type="number" name="rating" min="1" max="5" id=rating>
-                            <button type="submit" class="btnRest">Submit</a>
+                            <button type="submit" class="btnWriteSubmit">Submit</a>
                         </div>    
                     </form>
+                
+                    
                 {% endblock %}
+                </div>
               {% endfor %}
+              
             <!--<h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, repudiandae?</h3>-->
             
 
@@ -73,6 +117,26 @@
 
 
 </main>
+<script>
+    var acc = document.getElementsByClassName("toggle");
+    var i;
+    
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
+        /* Toggle between adding and removing the "active" class,
+        to highlight the button that controls the panel */
+        this.classList.toggle("active");
+    
+        /* Toggle between hiding and showing the active panel */
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
+        } else {
+          panel.style.display = "block";
+        }
+      });
+    }
+</script>
 
 
 </body>
