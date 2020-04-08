@@ -268,13 +268,12 @@ button:hover {
     flex: 2;
 }
 .top-restaurants {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 50px;
     padding: 2%;
     height: 70vh;
-    background-color: #eeeee1;
     justify-content: space-evenly;
-
 }
 
 .restaurant {
