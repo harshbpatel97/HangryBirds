@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href= "{% static "css/home.css" %}"  type="text/css" rel="stylesheet" />
 </head>
 <body>
@@ -52,15 +53,19 @@
                 <label for="password"><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="password" required>
                 <button type="submit" class="loginbtn" value="Login">Login</button>
+               <button type="button" class="cancelLoginbtn" onclick="location.href='{% url 'home' %}'">Cancel</button>
             </div>    
         </form>
     {% endblock %}
     <br>
-    <div class="container">
-       <a href="{% url 'home' %}" class="cancelLoginbtn">Cancel</a>
-        <span class="psw">Forgot <a href="#">password?</a></span>
-    </div>
+    <!--<div class="container">-->
+       
+        <!--<span class="psw">Forgot <a href="#">password?</a></span>-->
+    <!--</div>-->
 </main>
-
+<footer>
+    HangryBirds 2020 &copy; Copyrights Reserved.
+</footer> 
 </body>
+
 </html>

@@ -5,6 +5,7 @@
     <title>Hangry Birds</title>
     <meta name="description" content="Hangry Birds" />
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href= "{% static "css/home.css" %}" type="text/css" rel="stylesheet" />
 </head>
@@ -13,17 +14,17 @@
     <h1>Welcome back, {{username}}!</h1>
     <nav>
         <div class="navbar">
-            <a href="index.html">Home</a>
-            <a href="#news">Latest</a>
+            <a href="#">Home</a>
+            <!--<a href="#news">Latest</a>-->
             <a href="{% url 'showMyReviews' %}">My Reviews</a>
-            <div class="dropdown">
-                <button class="dropbtn">Search</button>
-                <div class="dropdown-content">
-                    <a href="#">By Restaurant</a>
-                    <a href="#">By Item</a>
-                    <a href="#">Editor's Picks</a>
-                </div>
-            </div>
+            <!--<div class="dropdown">-->
+            <!--    <button class="dropbtn">Search</button>-->
+            <!--    <div class="dropdown-content">-->
+            <!--        <a href="#">By Restaurant</a>-->
+            <!--        <a href="#">By Item</a>-->
+            <!--        <a href="#">Editor's Picks</a>-->
+            <!--    </div>-->
+            <!--</div>-->
             <a href={% url 'logout' %}>Logout</a>
         </div>
     </nav>
@@ -81,6 +82,8 @@
 
 
 </main>
-
+<footer class="footer-class">
+    HangryBirds 2020 &copy; Copyrights Reserved.
+</footer>
 
 </body>

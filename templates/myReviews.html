@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href= "{% static "css/home.css" %}" type="text/css" rel="stylesheet" />
     
 </head>
@@ -16,16 +17,16 @@
     <nav>
         <div class="navbar">
             <a href={% url 'login' %}>Home</a>
-            <a href="#">Latest</a>
+            <!--<a href="#">Latest</a>-->
             <a href="#">My Reviews</a>
-            <div class="dropdown">
-                <button class="dropbtn">Search</button>
-                <div class="dropdown-content">
-                    <a href="#">By Restaurant</a>
-                    <a href="#">By Item</a>
-                    <a href="#">Editor's Picks</a>
-                </div>
-            </div>
+            <!--<div class="dropdown">-->
+            <!--    <button class="dropbtn">Search</button>-->
+            <!--    <div class="dropdown-content">-->
+            <!--        <a href="#">By Restaurant</a>-->
+            <!--        <a href="#">By Item</a>-->
+            <!--        <a href="#">Editor's Picks</a>-->
+            <!--    </div>-->
+            <!--</div>-->
             <a href={% url 'logout' %}>Logout</a>
         </div>
     </nav>
@@ -164,6 +165,8 @@
 </script>
 
 </main>
-
+<footer class="footer-class">
+    HangryBirds 2020 &copy; Copyrights Reserved.
+</footer>
 
 </body>

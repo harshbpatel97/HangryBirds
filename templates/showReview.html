@@ -5,6 +5,7 @@
     <title>Hangry Birds</title>
     <meta name="description" content="Hangry Birds" />
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap" rel="stylesheet">
     <link href= "{% static "css/home.css" %}"  type="text/css" rel="stylesheet" />
@@ -15,16 +16,16 @@
     <nav>
         <div class="navbar">
             <a href={% url 'login' %}>Home</a>
-            <a href="#news">Latest</a>
+            <!--<a href="#news">Latest</a>-->
             <a href="{% url 'showMyReviews' %}">My Reviews</a>
-            <div class="dropdown">
-                <button class="dropbtn">Search</button>
-                <div class="dropdown-content">
-                    <a href="#">By Restaurant</a>
-                    <a href="#">By Item</a>
-                    <a href="#">Editor's Picks</a>
-                </div>
-            </div>
+            <!--<div class="dropdown">-->
+            <!--    <button class="dropbtn">Search</button>-->
+            <!--    <div class="dropdown-content">-->
+            <!--        <a href="#">By Restaurant</a>-->
+            <!--        <a href="#">By Item</a>-->
+            <!--        <a href="#">Editor's Picks</a>-->
+            <!--    </div>-->
+            <!--</div>-->
             <a href={% url 'logout' %}>Logout</a>
         </div>
     </nav>
@@ -138,6 +139,8 @@
       });
     }
 </script>
-
+<footer class="footer-class-showReview">
+    HangryBirds 2020 &copy; Copyrights Reserved.
+</footer>
 
 </body>
