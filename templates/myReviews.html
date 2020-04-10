@@ -60,7 +60,7 @@
                     <p><strong>Item:</strong><br><br> {{ r.menuObj.item_name}}</p>
                     <p><strong>Your Review:</strong></p>
                     <p class="review" id= "review{{r.id}}">{{ r.review}}</p>
-                    <textarea rows="10" cols="40" class="reviewinp" id="reviewEdit{{r.id}}">{{r.review}}</textarea>
+                    <textarea rows="10" cols="40" class="reviewinp" id="reviewEdit{{r.id}}" maxlength="900">{{r.review}}</textarea>
                     <!--<input type="text" class="reviewinp" id="reviewEdit{{r.id}}" value="{{r.review}}">-->
                     <p><strong>Rating:</strong></p>
                     <p class="rating" id="rating{{r.id}}">{{ r.rating}}</p>
