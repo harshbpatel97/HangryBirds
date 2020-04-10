@@ -126,4 +126,31 @@ def writeReview(request, parameter):
         template = loader.get_template("home.html")
         return HttpResponse(template.render())
     
+def showMyReviews(request):
+    if request.session.has_key('username'):
+        username = request.session['username']
+        userData = UserTable.objects.filter(username=username)
+        reviewData = ReviewTable.objects.filter(userObj__in=userData)
+        reviewVar = {
+            "username": username,
+            "userID": userData,
+            "review_ID": reviewData,
+        }
+        return render(request, 'myReviews.html', reviewVar)
         
+def deleteReview(request, parameter):
+    if request.session.has_key('username'):
+        ReviewTable.objects.filter(id=parameter).delete()
+        messages.info(request, 'You have successfully deleted your review')
+        return showMyReviews(request)
+
+def updateReview(request):
+    reviewObj = ReviewTable.objects.get(id=request.POST['review_ID'])
+    reviewObj.review = request.POST['review_text']
+    reviewObj.rating = request.POST['rating_text']
+    reviewObj.timestamp = datetime.datetime.now()
+    reviewObj.save()
+    messages.info(request, 'You have successfully updated your review')
+    print("Updated")
+    return showMyReviews(request)
+ 

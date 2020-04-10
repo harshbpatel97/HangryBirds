@@ -546,10 +546,53 @@ select{
     background-color: transparent;
     cursor: pointer;
     border: 2px solid #FF8033;
+    text-decoration: none;
     border-radius: 15px;
     padding: 5px 10px 5px 10px;
 }
 .btnShow:hover{
     background-color: #FF8033;
     color: white;
+}
+
+.my_reviews {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 50px;
+    padding: 2%;
+    height: auto;
+    
+}
+.review_ID {
+    height: 500px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background-color: #FF8033;
+    justify-content: center;
+    align-content: center;
+
+}
+.review_ID .checked {
+    color: #eeeee1;
+}
+.review_ID .editBtnClass{
+    background-color: #eeeee1;
+    color: #FF8033;
+    padding: 5px 10px 5px 5px;
+}
+.editBtnClass{
+    color: #FF8033;
+    background-color: white;
+    cursor: pointer;
+    border: 2px solid white;
+    border-radius: 15px;
+    padding: 5px 10px 5px 10px;
+    width: 75px;
+}
+.editBtnClass:hover{
+    background-color: #FF8033;
+    color: white;
+    border: 2px solid white;
 }

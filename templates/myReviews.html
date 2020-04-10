@@ -1,0 +1,169 @@
+{% load static %}
+<!doctype HTML>
+<html lang="en">
+<head>
+    <title>Hangry Birds</title>
+    <meta name="description" content="Hangry Birds" />
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link href= "{% static "css/home.css" %}" type="text/css" rel="stylesheet" />
+    
+</head>
+<body>
+<header>
+    <h1>Welcome back, {{username}}!</h1>
+    <nav>
+        <div class="navbar">
+            <a href={% url 'login' %}>Home</a>
+            <a href="#">Latest</a>
+            <a href="#">My Reviews</a>
+            <div class="dropdown">
+                <button class="dropbtn">Search</button>
+                <div class="dropdown-content">
+                    <a href="#">By Restaurant</a>
+                    <a href="#">By Item</a>
+                    <a href="#">Editor's Picks</a>
+                </div>
+            </div>
+            <a href={% url 'logout' %}>Logout</a>
+        </div>
+    </nav>
+
+
+</header>
+<main>
+     {% if messages %}
+        <div class="alert">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+           <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+           </ul>
+        </div>
+       
+    {% endif %}
+   
+    <section class="main-information">
+       
+        <div class="top-main">
+        <h2>My Reviews!</h2>
+        <div class="my_reviews">
+     
+        {% for r in review_ID %}
+          <div class="review_ID" id={{r.id}}>
+                <div class="reivew-text">
+                    <h3>{{ r.restObj.rest_name}}</h3>
+                    
+                    <p><strong>Item:</strong><br><br> {{ r.menuObj.item_name}}</p>
+                    <p><strong>Your Review:</strong></p>
+                    <p class="review" id= "review{{r.id}}">{{ r.review}}</p>
+                    <textarea rows="10" cols="40" class="reviewinp" id="reviewEdit{{r.id}}">{{r.review}}</textarea>
+                    <!--<input type="text" class="reviewinp" id="reviewEdit{{r.id}}" value="{{r.review}}">-->
+                    <p><strong>Rating:</strong></p>
+                    <p class="rating" id="rating{{r.id}}">{{ r.rating}}</p>
+                    <input type="number" class="ratinginp" id="ratingEdit{{r.id}}" min="1" max="5" value={{r.rating}}>
+                    <div class="ratingStars" id="star{{r.id}}">
+                        {% if r.rating == 1 %}
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        {% elif r.rating == 2 %}
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        {% elif r.rating == 3 %}
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        {% elif r.rating == 4 %}
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                        {% elif r.rating == 5 %}
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                        {% endif %}
+                    </div>
+                    
+                    <p>{{ r.timestamp}}</p>
+                </div>
+                <div>
+                    <button class="editBtnClass" id="editBtn{{r.id}}" onclick="f({{r.id}})">Edit</button>
+                    <!--<a class="editBtn">Edit</a>-->
+                    <button class="editBtnClass" onclick="location.href='{% url 'deleteReview' parameter=r.id %}'">Delete</button>
+                    
+                </div>
+                
+            </div>
+            
+         {% endfor%}
+         </div>
+        <div class="bottom-main">
+            <h2></h2>
+            <div class="favorite-restaurants"></div>
+        </div>
+    </section>
+<script>
+    window.onload = function f(){
+        $(".review").show();
+        $(".rating").show();
+        $(".reviewinp").hide();
+        $(".ratinginp").hide();
+    };
+    function f(lol){
+        var l = "#" + lol;
+        var ed = "#editBtn" + lol;
+        var stars = "#star" + lol;
+        var x = "#reviewEdit" + lol;
+        var y = "#ratingEdit" + lol;
+        var z = "#review" + lol;
+        var a = "#rating" + lol;
+        console.log($(y).val());
+        if($(ed).text() == "Edit"){
+            $(ed).text("Submit");
+        } else {
+            $(ed).text("Edit");
+            $("#updateMsg").toggle();
+            $.ajax({
+                type: "POST",
+                url: '{% url 'updateReview' %}',
+                data: {
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        review_ID: lol,
+                        review_text: $(x).val(),
+                        rating_text: $(y).val(),
+                    },
+                success: function(response){
+                    alert("You have successfully updated your review!")
+                    window.location.href = "{% url 'showMyReviews' %}"
+                }
+            });
+        }
+     
+        $(z).toggle();
+        $(a).toggle();
+        $(x).toggle();
+        $(y).toggle();
+        $(stars).toggle();
+        $(z).text($(x).val());
+        $(a).text($(y).val());
+    }
+</script>
+
+</main>
+
+
+</body>

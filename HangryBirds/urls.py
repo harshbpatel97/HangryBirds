@@ -34,4 +34,7 @@ urlpatterns = [
                   url(r'^logout/', views.logout, name = 'logout'),
                   url(r'^showReview/(?P<parameter>[\w-]+)', views.showReview, name="showReview"),
                   url(r'^writeReview/(?P<parameter>[\w-]+)', views.writeReview, name="writeReview"),
+                  url(r'^showMyReviews/', views.showMyReviews, name="showMyReviews"),
+                  url(r'^deleteReview/(?P<parameter>[\w-]+)', views.deleteReview, name="deleteReview"),
+                  url(r'^updateReview/', views.updateReview, name = 'updateReview'),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
