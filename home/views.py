@@ -12,6 +12,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from passlib.hash import pbkdf2_sha256
 import datetime
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
+
+from django.db.models import Q
 
 def home(request):
     template = loader.get_template("home.html")
@@ -153,4 +156,44 @@ def updateReview(request):
     messages.info(request, 'You have successfully updated your review')
     print("Updated")
     return showMyReviews(request)
- 
+    
+def loadFoodSearch(request):
+    username = request.session['username']
+    userData = {
+        "username": username
+    }
+    return render(request, 'search_food.html', userData)
+
+
+@csrf_exempt
+def get_queryset_food(request):
+    if request.method == 'POST':
+        query = request.POST['inputSearch']
+        object_list = MenuTable.objects.filter(Q(item_name__icontains=query))
+        username = request.session['username']
+        foodVar = {
+            "object_list" : object_list,
+            "query": query,
+            "username": username
+        }
+        return render(request, 'search_food.html', foodVar)
+        
+def loadRestSearch(request):
+    username = request.session['username']
+    userData = {
+        "username": username
+    }
+    return render(request, 'search_rest.html', userData)
+    
+@csrf_exempt
+def get_queryset_rest(request):
+    if request.method == 'POST':
+        query = request.POST['inputSearch']
+        username = request.session['username']
+        object_list = RestaurantTable.objects.filter(Q(rest_name__icontains=query))
+        foodVar = {
+            "object_list" : object_list,
+            "query": query,
+            "username": username
+        }
+        return render(request, 'search_rest.html', foodVar)

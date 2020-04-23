@@ -14,14 +14,14 @@
     <h1>Welcome back, {{username}}!</h1>
     <nav>
         <div class="navbar">
-            <a href="#">Home</a>
+            <a href={% url 'login' %}>Home</a>
             <!--<a href="#news">Latest</a>-->
             <a href="{% url 'showMyReviews' %}">My Reviews</a>
             <div class="dropdown">
                 <button class="dropbtn">Search</button>
                 <div class="dropdown-content">
                     <a href={% url 'loadRestSearch' %}>By Restaurant</a>
-                    <a href="{% url 'loadFoodSearch' %}">By Food Item</a>
+                    <a href="#">By Food Item</a>
                 </div>
             </div>
             <a href={% url 'logout' %}>Logout</a>
@@ -43,39 +43,33 @@
        
     {% endif %}
     <section class="main-information">
-        <!--<div class="searchbar">-->
-        <!--    <h2>Search</h2><br>-->
-        <!--    <div class="line-search">-->
-        <!--        <input  class="search-bar-bar" placeholder="Search...">-->
-        <!--        <select name="search-select" id="search-select" >-->
-        <!--            <option value="restaurant">Restaurant</option>-->
-        <!--            <option value="food">Food Item</option>-->
-        <!--        </select>-->
-                
-        <!--        <button type="submit">Search</button>-->
-        <!--    </div>-->
-        <!--</div>-->
-        <div class="top-main">
-        <h2>Top Restaurants Around Charlotte!</h2>
-        <div class="top-restaurants">
-     
-        {% for r in rest_ID %}
-          <div class="restaurant" id={{r.rest_ID}}>
-                       <div class="restaurant-text">
-                        <h3>{{ r.rest_name}}</h3>
-                        <p>{{ r.rest_loc}}</p>
-                        <p>{{ r.rest_contact}}</p>
+        <div class="searchbar">
+            <h2>Search</h2><br>
+             {% block content %}
+                <form method="POST" action="/get_queryset_food/" >
+                    {% csrf_token %}
+                    <div class="line-search">
+                        <input  class="search-bar-bar" name="inputSearch" placeholder="Search..." required>
+                        <!--<select name="search-select" id="search-select" >-->
+                        <!--    <option value="restaurant">Restaurant</option>-->
+                        <!--    <option value="food">Food Item</option>-->
+                        <!--</select>-->
+                        
+                        <button type="submit">Search</button>
                     </div>
-                <div class="buttons">
-                    <a href="{% url 'showReview' parameter=r.rest_ID %}" class="btnShow">Show/Write Reviews</a>
-                </div>
-            </div>
-            
-         {% endfor%}
-         </div>
-        <div class="bottom-main">
-            <h2></h2>
-            <div class="favorite-restaurants"></div>
+                </form>
+            {% endblock %}
+        </div>
+
+        <div>
+            <h2>Search Results: {{query}}</h2>
+            <ul>
+              {% for menu in object_list %}
+                <li>
+                  <a href="{% url 'showReview' parameter=menu.restObj.rest_ID %}">{{ menu.item_name }} --- {{menu.restObj.rest_name}}</a>
+                </li>
+              {% endfor %}
+            </ul>
         </div>
     </section>
 

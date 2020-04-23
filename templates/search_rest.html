@@ -1,0 +1,82 @@
+{% load static %}
+<!doctype HTML>
+<html lang="en">
+<head>
+    <title>Hangry Birds</title>
+    <meta name="description" content="Hangry Birds" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href= "{% static "css/home.css" %}" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<header>
+    <h1>Welcome back, {{username}}!</h1>
+    <nav>
+        <div class="navbar">
+            <a href={% url 'login' %}>Home</a>
+            <!--<a href="#news">Latest</a>-->
+            <a href="{% url 'showMyReviews' %}">My Reviews</a>
+            <div class="dropdown">
+                <button class="dropbtn">Search</button>
+                <div class="dropdown-content">
+                    <a href="#">By Restaurant</a>
+                    <a href={% url 'loadFoodSearch' %}>By Food Item</a>
+                </div>
+            </div>
+            <a href={% url 'logout' %}>Logout</a>
+        </div>
+    </nav>
+
+
+</header>
+<main>
+     {% if messages %}
+        <div class="alert">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+           <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+           </ul>
+        </div>
+       
+    {% endif %}
+    <section class="main-information">
+        <div class="searchbar">
+            <h2>Search</h2><br>
+             {% block content %}
+                <form method="POST" action="/get_queryset_rest/" >
+                    {% csrf_token %}
+                    <div class="line-search">
+                        <input  class="search-bar-bar" name="inputSearch" placeholder="Search..." required>
+                        <!--<select name="search-select" id="search-select" >-->
+                        <!--    <option value="restaurant">Restaurant</option>-->
+                        <!--    <option value="food">Food Item</option>-->
+                        <!--</select>-->
+                        
+                        <button type="submit">Search</button>
+                    </div>
+                </form>
+            {% endblock %}
+        </div>
+
+        <div>
+            <h2>Search Results: {{query}}</h2>
+            <ul>
+              {% for rest in object_list %}
+                <li>
+                  <a href="{% url 'showReview' parameter=rest.rest_ID %}">{{ rest.rest_name }} --- {{rest.rest_loc}} --- {{rest.rest_contact}}</a>
+                </li>
+              {% endfor %}
+            </ul>
+        </div>
+    </section>
+
+
+</main>
+<footer class="footer-class">
+    HangryBirds 2020 &copy; Copyrights Reserved.
+</footer>
+
+</body>

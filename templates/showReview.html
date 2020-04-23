@@ -18,14 +18,13 @@
             <a href={% url 'login' %}>Home</a>
             <!--<a href="#news">Latest</a>-->
             <a href="{% url 'showMyReviews' %}">My Reviews</a>
-            <!--<div class="dropdown">-->
-            <!--    <button class="dropbtn">Search</button>-->
-            <!--    <div class="dropdown-content">-->
-            <!--        <a href="#">By Restaurant</a>-->
-            <!--        <a href="#">By Item</a>-->
-            <!--        <a href="#">Editor's Picks</a>-->
-            <!--    </div>-->
-            <!--</div>-->
+           <div class="dropdown">
+                <button class="dropbtn">Search</button>
+                <div class="dropdown-content">
+                    <a href={% url 'loadRestSearch' %}>By Restaurant</a>
+                    <a href={% url 'loadFoodSearch' %}>By Food Item</a>
+                </div>
+            </div>
             <a href={% url 'logout' %}>Logout</a>
         </div>
     </nav>

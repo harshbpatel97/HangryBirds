@@ -10,7 +10,7 @@ body{
 }
 header{
     display: flex;
-    height: 100px;
+    height: 10vh;
     background-color: #FF8033;
     align-items: center;
     
@@ -571,15 +571,15 @@ select{
 
 .my_reviews {
     display: grid;
-    grid-template-columns: auto auto auto auto;
-    grid-gap: 50px;
+    grid-template-columns: auto auto auto;
+    grid-gap: 2vw;
     padding: 2%;
     height: auto;
     
 }
 .review_ID {
     height: 60vh;
-    width: 20vw;
+    width: 30vw;
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -700,5 +700,5 @@ select{
 }
 
 main{
-    min-height: 100vh;
+    min-height: 80vh;
 }
