@@ -14,9 +14,9 @@
     <h1>Welcome back, {{username}}!</h1>
     <nav>
         <div class="navbar">
-            <a href="#">Home</a>
+            <a href="{% url 'login' %}">Home</a>
             <!--<a href="#news">Latest</a>-->
-            <a href="{% url 'redirectPending' %}">Pending Requests</a>
+            <a href="#">Pending Requests</a>
             <a href={% url 'logout' %}>Logout</a>
         </div>
     </nav>
@@ -49,17 +49,19 @@
         <!--    </div>-->
         <!--</div>-->
         <div class="top-main">
-        <h2>All Reviews!</h2>
+        <h2>All Pending Requests!</h2>
         <div class="top-restaurants">
      
-        {% for r in reviewData %}
-          <div class="restaurant admin" id={{r.rest_ID}}>
+        {% for i in pendingItemData %}
+          <div class="restaurant admin" id={{i.id}}>
                        <div class="restaurant-text">
-                        <h3>{{ r.review}}</h3>
-                        <p>{{ r.userObj.username}}</p>
+                        <p>{{ i.item_name}}</p>
+                        <p>{{ i.restObj.rest_name}}</p>
+                        <p>{{ i.userObj.username}}</p>
                     </div>
                 <div class="buttons">
-                    <a href="{% url 'deleteReviewByAdmin' parameter=r.id %}" class="btnShow">Delete Review</a>
+                    <a href="{% url 'approveItemRequest' parameter=i.id %}" class="btnShow">Approve</a>
+                    <a href="{% url 'declineItemRequest' parameter=i.id %}" class="btnShow">Decline</a>
                 </div>
             </div>
             

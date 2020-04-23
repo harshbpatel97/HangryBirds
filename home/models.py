@@ -39,3 +39,11 @@ class ReviewTable(models.Model):
 
     def __str__(self):
         return str(self.review)
+        
+class PendingMenuTable(models.Model):
+    userObj = models.ForeignKey(UserTable, on_delete=models.CASCADE)
+    restObj = models.ForeignKey(RestaurantTable, on_delete=models.CASCADE)
+    item_name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return str(self.review)

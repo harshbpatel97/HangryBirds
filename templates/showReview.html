@@ -32,6 +32,17 @@
 
 </header>
 <main>
+    {% if messages %}
+        <div class="alert">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+           <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+           </ul>
+        </div>
+       
+    {% endif %}
     <section class="template-main">
         <div class="left-template">
             <!--<img src="tb.png" alt="Taco Bell">-->
@@ -113,6 +124,18 @@
                 </div>
               {% endfor %}
               
+              <h3>Got a New Food Item?</h3>
+                
+                    <form method="POST" action="{% url 'pendingItemRequest' parameter=rest_ID.rest_ID %}" >
+                        {% csrf_token %}
+                        <div class="writeForm">
+                            <label for="itemName">Item Name:</label>
+                            <input type="text" id="itemName" name="itemName" maxlength="45" required></input>
+                            <button type="submit" class="btnWriteSubmit">Submit Request</a>
+                        </div>    
+                    </form>
+                
+                    
             <!--<h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, repudiandae?</h3>-->
             <p id="fetchValue" style="display: none">{{item_ID}}</p>
 

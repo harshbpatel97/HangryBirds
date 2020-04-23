@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import render, redirect
 from django.contrib import auth, sessions
-from .models import UserTable, RestaurantTable, MenuTable, ReviewTable
+from .models import UserTable, RestaurantTable, MenuTable, ReviewTable, PendingMenuTable
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from passlib.hash import pbkdf2_sha256
@@ -245,3 +245,43 @@ def deleteReviewByAdmin(request, parameter):
     ReviewTable.objects.filter(id=parameter).delete()
     messages.info(request, 'You have successfully deleted the review')
     return login(request)
+    
+def pendingItemRequest(request, parameter):
+    if request.method == 'POST':
+        newItem = PendingMenuTable()
+        username = request.session['username']
+        newItem.item_name = request.POST['itemName']
+        newItem.restObj = RestaurantTable.objects.get(rest_ID=parameter)
+        newItem.userObj = UserTable.objects.get(username=username)
+        newItem.save()
+        rest_ID = parameter
+        messages.info(request, 'Your request is submitted and subject to admin approval!!!')
+        return showReview(request, rest_ID)
+        
+def redirectPending(request):
+    if request.session.has_key('username'):
+        username = request.session['username']
+        pendingItemData = PendingMenuTable.objects.all()
+        data = {
+            "username": username,
+            "pendingItemData": pendingItemData,
+        }
+        return render(request, 'pendingItem.html', data)
+    else:
+        return render(request, 'login.html')
+        
+def approveItemRequest(request, parameter):
+    newMenu = MenuTable()
+    newMenu.restObj = PendingMenuTable.objects.get(id=parameter).restObj
+    newMenu.item_name=PendingMenuTable.objects.get(id=parameter).item_name
+    temp =  MenuTable.objects.latest("item_ID").item_ID + 1
+    newMenu.item_ID = temp
+    newMenu.save()
+    messages.info(request, "You have successfully approved the request!!!")
+    PendingMenuTable.objects.get(id=parameter).delete()
+    return redirectPending(request)
+    
+def declineItemRequest(request, parameter):
+    PendingMenuTable.objects.get(id=parameter).delete()
+    messages.info(request, "You have successfully declined the request!!!")
+    return redirectPending(request)
