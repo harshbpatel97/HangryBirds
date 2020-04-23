@@ -1,0 +1,80 @@
+{% load static %}
+<!doctype HTML>
+<html lang="en">
+<head>
+    <title>Hangry Birds</title>
+    <meta name="description" content="Hangry Birds" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href= "{% static "css/home.css" %}" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<header>
+    <h1>Welcome back, {{username}}!</h1>
+    <nav>
+        <div class="navbar">
+            <a href="#">Home</a>
+            <!--<a href="#news">Latest</a>-->
+            <a href="#">Pending Requests</a>
+            <a href={% url 'logout' %}>Logout</a>
+        </div>
+    </nav>
+
+
+</header>
+<main>
+     {% if messages %}
+        <div class="alert">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+           <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+           </ul>
+        </div>
+       
+    {% endif %}
+    <section class="main-information">
+        <!--<div class="searchbar">-->
+        <!--    <h2>Search</h2><br>-->
+        <!--    <div class="line-search">-->
+        <!--        <input  class="search-bar-bar" placeholder="Search...">-->
+        <!--        <select name="search-select" id="search-select" >-->
+        <!--            <option value="restaurant">Restaurant</option>-->
+        <!--            <option value="food">Food Item</option>-->
+        <!--        </select>-->
+                
+        <!--        <button type="submit">Search</button>-->
+        <!--    </div>-->
+        <!--</div>-->
+        <div class="top-main">
+        <h2>All Reviews!</h2>
+        <div class="top-restaurants">
+     
+        {% for r in reviewData %}
+          <div class="restaurant admin" id={{r.rest_ID}}>
+                       <div class="restaurant-text">
+                        <h3>{{ r.review}}</h3>
+                        <p>{{ r.userObj.username}}</p>
+                    </div>
+                <div class="buttons">
+                    <a href="{% url 'deleteReviewByAdmin' parameter=r.id %}" class="btnShow">Delete Review</a>
+                </div>
+            </div>
+            
+         {% endfor%}
+         </div>
+        <div class="bottom-main">
+            <h2></h2>
+            <div class="favorite-restaurants"></div>
+        </div>
+    </section>
+
+
+</main>
+<footer class="footer-class">
+    HangryBirds 2020 &copy; Copyrights Reserved.
+</footer>
+
+</body>

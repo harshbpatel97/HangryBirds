@@ -46,7 +46,11 @@
             <h2>MENU</h2>
             <p id="caption">(Click an item below to view and write reviews!)</p>
             {% for m in menu_ID %}
-                <button class="toggle">{{ m.item_name }}</button>
+                {% ifequal m.item_ID|slugify item_ID %}
+                    <button class="toggle active1">{{ m.item_name }}</button>
+                {% else %} 
+                     <button class="toggle">{{ m.item_name }}</button>
+                {% endifequal %}
                 <div class="panel">
                     <h3>Reviews</h3>
                 {% for r in review_ID %}
@@ -110,7 +114,7 @@
               {% endfor %}
               
             <!--<h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, repudiandae?</h3>-->
-            
+            <p id="fetchValue" style="display: none">{{item_ID}}</p>
 
         </div>
 
@@ -121,7 +125,6 @@
 <script>
     var acc = document.getElementsByClassName("toggle");
     var i;
-    
     for (i = 0; i < acc.length; i++) {
       acc[i].addEventListener("click", function() {
         /* Toggle between adding and removing the "active" class,

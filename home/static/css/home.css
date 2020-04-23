@@ -301,6 +301,10 @@ button:hover {
     align-content: center;
 
 }
+
+.admin {
+    height: 40vw;
+}
 .restaurant:hover {
     background-color: white;
     resize: horizontal;
@@ -495,9 +499,15 @@ select{
     text-align: center;
 }
 
+.active1 {
+  background-color: #FF8033; 
+}
+
 .active, .toggle:hover {
   background-color: #FF8033; 
 }
+
+
 
 .panel {
   margin-left: 27.5%;

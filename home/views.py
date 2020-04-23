@@ -48,6 +48,15 @@ def signup(request):
 def login(request):
     if request.session.has_key('username'):
         username = request.session['username']
+        if username == "Admin":
+            request.session['username'] = username
+            reviewData = ReviewTable.objects.all()
+            reviewVar = {
+                "reviewData": reviewData,
+                "username": username
+            }
+            return render(request, "admin.html", reviewVar)
+        
         restData = RestaurantTable.objects.all()
         restVar = {
             "rest_ID": restData,
@@ -64,7 +73,17 @@ def login_view(request):
         password = request.POST['password']
         users = UserTable.objects.filter(username=username)
         user = users.first()
-        if user != None:
+        if username == "Admin":
+            if pbkdf2_sha256.verify(password,user.password):
+                request.session['username'] = username
+                reviewData = ReviewTable.objects.all()
+                reviewVar = {
+                    "reviewData": reviewData,
+                    "username": username
+                }
+                return render(request, "admin.html", reviewVar)
+        
+        elif user != None:
             if pbkdf2_sha256.verify(password,user.password):
                 request.session['username'] = username
                 restData = RestaurantTable.objects.all()
@@ -176,8 +195,30 @@ def get_queryset_food(request):
             "query": query,
             "username": username
         }
+        messageStr = str(len(object_list)) + " result/s found!!!"
+        messages.info(request, messageStr)
         return render(request, 'search_food.html', foodVar)
-        
+
+
+def redirectFoodSearch(request, parameter):
+    if request.session.has_key('username'):
+        username = request.session['username']
+        item_ID = parameter
+        print(item_ID)
+        rest_ID = MenuTable.objects.filter(item_ID=item_ID).first().restObj.rest_ID
+        restData = RestaurantTable.objects.get(rest_ID=rest_ID)
+        menuData = MenuTable.objects.filter(restObj=rest_ID)
+        reviewData = ReviewTable.objects.filter(restObj=rest_ID)
+        restVar = {
+            "rest_ID": restData,
+            "username": username,
+            "menu_ID": menuData,
+            "review_ID": reviewData,
+            "item_ID": item_ID,
+        }
+        return render(request, 'showReview.html', restVar)
+
+
 def loadRestSearch(request):
     username = request.session['username']
     userData = {
@@ -196,4 +237,11 @@ def get_queryset_rest(request):
             "query": query,
             "username": username
         }
+        messageStr = str(len(object_list)) + " result/s found!!!"
+        messages.info(request, messageStr)
         return render(request, 'search_rest.html', foodVar)
+        
+def deleteReviewByAdmin(request, parameter):
+    ReviewTable.objects.filter(id=parameter).delete()
+    messages.info(request, 'You have successfully deleted the review')
+    return login(request)

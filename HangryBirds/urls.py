@@ -41,4 +41,6 @@ urlpatterns = [
                   url(r'^get_queryset_food/', views.get_queryset_food, name = 'get_queryset_food'),
                   url(r'^loadRestSearch/', views.loadRestSearch, name = 'loadRestSearch'),
                   url(r'^get_queryset_rest/', views.get_queryset_rest, name = 'get_queryset_rest'),
+                  url(r'^redirectFoodSearch/(?P<parameter>[\w-]+)', views.redirectFoodSearch, name="redirectFoodSearch"),
+                  url(r'^deleteReviewByAdmin/(?P<parameter>[\w-]+)', views.deleteReviewByAdmin, name="deleteReviewByAdmin"),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -66,7 +66,7 @@
             <ul>
               {% for menu in object_list %}
                 <li>
-                  <a href="{% url 'showReview' parameter=menu.restObj.rest_ID %}">{{ menu.item_name }} --- {{menu.restObj.rest_name}}</a>
+                  <a href="{% url 'redirectFoodSearch' parameter=menu.item_ID %}">{{ menu.item_name }} --- {{menu.restObj.rest_name}}</a>
                 </li>
               {% endfor %}
             </ul>
