@@ -11,6 +11,7 @@
 </head>
 <body>
 <header>
+    <div><img src="{% static "images/hangrybirdsLogo.png" %}" alt="logo" width="85px"></img></div>
     <h1>Welcome back, {{username}}!</h1>
     <nav>
         <div class="navbar">
@@ -62,6 +63,7 @@
         {% for r in rest_ID %}
           <div class="restaurant" id={{r.rest_ID}}>
                        <div class="restaurant-text">
+                        <img src="{{r.rest_img}}" alt="{{r.rest_name}}" width="75px" height="90px"></img>
                         <h3>{{ r.rest_name}}</h3>
                         <p>{{ r.rest_loc}}</p>
                         <p>{{ r.rest_contact}}</p>

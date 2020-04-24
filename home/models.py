@@ -16,6 +16,7 @@ class RestaurantTable(models.Model):
     rest_name = models.CharField(max_length=100)
     rest_loc = models.CharField(max_length=250)
     rest_contact = models.CharField(max_length=15)
+    rest_img = models.CharField(max_length=2000, default="")
     
     def __str__(self):
         return self.rest_ID
