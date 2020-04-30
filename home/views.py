@@ -82,6 +82,11 @@ def login_view(request):
                     "username": username
                 }
                 return render(request, "admin.html", reviewVar)
+            else:
+                print("Someone tried to login and failed.")
+                print("They used username: {} and password: {}".format(username, password))
+                messages.info(request, 'Invalid login details!')
+                return render(request, "login.html")
         
         elif user != None:
             if pbkdf2_sha256.verify(password,user.password):
@@ -92,6 +97,11 @@ def login_view(request):
                     "username": username
                 }
                 return render(request, "index.html", restVar)
+            else:
+                print("Someone tried to login and failed.")
+                print("They used username: {} and password: {}".format(username, password))
+                messages.info(request, 'Invalid login details!')
+                return render(request, "login.html")
         else:
             print("Someone tried to login and failed.")
             print("They used username: {} and password: {}".format(username, password))
