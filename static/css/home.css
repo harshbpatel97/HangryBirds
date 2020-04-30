@@ -291,8 +291,8 @@ button:hover {
 }
 
 .restaurant {
-    height: 30vw;
-    width: 20vw;
+    height: 300px;
+    width: 200px;
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -300,6 +300,10 @@ button:hover {
     justify-content: center;
     align-content: center;
 
+}
+
+.admin {
+    height: 40vw;
 }
 .restaurant:hover {
     background-color: white;
@@ -310,18 +314,17 @@ button:hover {
 }
 .restaurant:hover img{
     animation: up 1.0s ease;
-    transform: translateY(-4vw);
+    transform: translateY(-25px);
 }
 .restaurant:hover .restaurant-text {
     animation: up 1.0s ease;
-    transform: translateY(-4vw);
+    transform: translateY(-25px);
 }
 .restaurant img {
-    height: 15vh;
-    width: 15vh;
+    height: 300px;
+    width: 200px;
     margin-left: auto;
     margin-right: auto;
-    transform: translateY(50px);
 }
 
 .container{
@@ -344,7 +347,7 @@ button:hover {
         transform: translateY(0px);
     }
     100%{
-        transform: translateY(-4vw);
+        transform: translateY(-25px);
     }
 }
 .buttons{
@@ -495,9 +498,15 @@ select{
     text-align: center;
 }
 
+.active1 {
+  background-color: #FF8033; 
+}
+
 .active, .toggle:hover {
   background-color: #FF8033; 
 }
+
+
 
 .panel {
   margin-left: 27.5%;

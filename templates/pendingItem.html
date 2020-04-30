@@ -6,7 +6,7 @@
     <meta name="description" content="Hangry Birds" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <link href= "{% static "css/home.css" %}" type="text/css" rel="stylesheet" />
 </head>
 <body>
@@ -15,10 +15,10 @@
     <h1>Welcome back, {{username}}!</h1>
     <nav>
         <div class="navbar">
-            <a href="{% url 'login' %}">Home</a>
+            <a href="{% url 'login' %}"><strong>HOME</strong></a>
             <!--<a href="#news">Latest</a>-->
-            <a href="#">Pending Requests</a>
-            <a href={% url 'logout' %}>Logout</a>
+            <a href="#"><strong>PENDING REQUESTS</strong></a>
+            <a href={% url 'logout' %}><strong>LOGOUT</strong></a>
         </div>
     </nav>
 
@@ -56,9 +56,9 @@
         {% for i in pendingItemData %}
           <div class="restaurant admin" id={{i.id}}>
                        <div class="restaurant-text">
-                        <p>{{ i.item_name}}</p>
-                        <p>{{ i.restObj.rest_name}}</p>
-                        <p>{{ i.userObj.username}}</p>
+                        <p class="p2"><strong>Item Name:</strong> {{ i.item_name}}</p>
+                        <p class="p2"><strong>Restaurant:</strong> {{ i.restObj.rest_name}}</p>
+                        <p class="p2"><strong>Username:</strong> {{ i.userObj.username}}</p>
                     </div>
                 <div class="buttons">
                     <a href="{% url 'approveItemRequest' parameter=i.id %}" class="btnShow">Approve</a>

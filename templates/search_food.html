@@ -6,7 +6,7 @@
     <meta name="description" content="Hangry Birds" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <link href= "{% static "css/home.css" %}" type="text/css" rel="stylesheet" />
 </head>
 <body>
@@ -15,17 +15,17 @@
     <h1>Welcome back, {{username}}!</h1>
     <nav>
         <div class="navbar">
-            <a href={% url 'login' %}>Home</a>
+            <a href="#"><strong>HOME</strong></a>
             <!--<a href="#news">Latest</a>-->
-            <a href="{% url 'showMyReviews' %}">My Reviews</a>
+            <a href="{% url 'showMyReviews' %}"><strong>MY REVIEWS</strong></a>
             <div class="dropdown">
-                <button class="dropbtn">Search</button>
+                <button class="dropbtn"><strong>SEARCH</strong></button>
                 <div class="dropdown-content">
-                    <a href={% url 'loadRestSearch' %}>By Restaurant</a>
-                    <a href="#">By Food Item</a>
+                    <a href={% url 'loadRestSearch' %}><strong>BY RESTAURANT</strong></a>
+                    <a href="{% url 'loadFoodSearch' %}"><strong>BY FOOD ITEM</strong></a>
                 </div>
             </div>
-            <a href={% url 'logout' %}>Logout</a>
+            <a href={% url 'logout' %}><strong>LOGOUT</strong></a>
         </div>
     </nav>
 
@@ -56,7 +56,7 @@
                         <!--    <option value="food">Food Item</option>-->
                         <!--</select>-->
                         
-                        <button type="submit">Search</button>
+                        <button class="btnSearch" type="submit">Search</button>
                     </div>
                 </form>
             {% endblock %}
@@ -64,13 +64,13 @@
 
         <div>
             <h2>Search Results: {{query}}</h2>
-            <ul>
+            
               {% for menu in object_list %}
-                <li>
-                  <a href="{% url 'redirectFoodSearch' parameter=menu.item_ID %}">{{ menu.item_name }} --- {{menu.restObj.rest_name}}</a>
-                </li>
+                    <div class="search-list">
+                        <a href="{% url 'redirectFoodSearch' parameter=menu.item_ID %}">{{ menu.item_name }} --- {{menu.restObj.rest_name}}</a>
+                    </div>
               {% endfor %}
-            </ul>
+            
         </div>
     </section>
 
